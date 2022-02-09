@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ContainerAuth = styled.div`
   background-color: #f9f9f9;
-  max-height: 100vh;
+  min-height: 100vh;
   padding: 12px 16px 0 16px;
 
   display: flex;

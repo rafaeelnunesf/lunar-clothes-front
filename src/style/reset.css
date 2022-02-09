@@ -141,4 +141,5 @@ a {
 
 body {
   font-family: "Metropolis";
+  overflow-y: hidden;
 }

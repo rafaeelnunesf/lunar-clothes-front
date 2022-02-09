@@ -1,6 +1,6 @@
 import CustomInput from "./style";
 
-export default function Inputs({ inputs }) {
+export default function Inputs({ inputs, data, setData }) {
   return (
     <>
       {inputs.map((input, index) => (
