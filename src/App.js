@@ -3,14 +3,17 @@ import "@fontsource/metropolis";
 
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import UserTokenProvider from "./contexts/AuthContext";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path={"/entrar"} element={<Login />} />
-        <Route path={"/cadastro"} element={<Signup />} />
-      </Routes>
+      <UserTokenProvider>
+        <Routes>
+          <Route path={"/entrar"} element={<Login />} />
+          <Route path={"/cadastro"} element={<Signup />} />
+        </Routes>
+      </UserTokenProvider>
     </BrowserRouter>
   );
 }

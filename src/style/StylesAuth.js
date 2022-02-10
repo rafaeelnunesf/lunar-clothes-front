@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ContainerAuth = styled.div`
   background-color: #f9f9f9;
-  min-height: 100vh;
+  max-height: 100vh;
   padding: 12px 16px 0 16px;
 
   display: flex;
@@ -14,6 +14,10 @@ const ContainerAuth = styled.div`
     font-size: 20px;
     align-self: flex-start;
     font-weight: 900;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   h2 {
@@ -45,6 +49,10 @@ const CustomLink = styled(Link)`
     color: #db3022;
     margin-left: 10px;
     line-height: 20px;
+  }
+
+  :hover {
+    cursor: pointer;
   }
 `;
 
