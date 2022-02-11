@@ -4,7 +4,6 @@ export default function Inputs({ inputs, data, setData }) {
   function keyboardAnswer(keyboard, input) {
     setData({ ...data, [input.parameterName]: keyboard.value });
   }
-  console.log(data);
 
   return (
     <>
@@ -16,6 +15,7 @@ export default function Inputs({ inputs, data, setData }) {
           label={input.label}
           variant="standard"
           key={index}
+          autoComplete={input.autoComplete}
           required
         />
       ))}

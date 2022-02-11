@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://mock-api.driven.com.br/api/v2/trackit";
+const BASE_URL = "http://localhost:5000";
 
 function postSignUp(data) {
   const response = axios.post(`${BASE_URL}/auth/signup`, data);
