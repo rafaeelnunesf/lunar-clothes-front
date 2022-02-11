@@ -21,6 +21,28 @@ const Container = styled.div`
     margin: 34px 0 24px 0;
     align-self: flex-start;
   }
+
+  .totalAmount {
+    margin: 28px 5px 26px 5px;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      object-position: left;
+      font-weight: 600;
+      font-size: 14px;
+      color: #9b9b9b;
+    }
+
+    span {
+      object-position: right;
+      font-weight: 900;
+      font-size: 18px;
+      color: black;
+    }
+  }
 `;
 
 export default Container;

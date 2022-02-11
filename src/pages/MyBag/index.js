@@ -31,6 +31,10 @@ export default function MyBag() {
       {productsInBag.map((product, i) => (
         <BoxProductBag data={product} index={i} />
       ))}
+      <div className="totalAmount">
+        <p>Valor total:</p>
+        <span>R$124</span>
+      </div>
       <Button fieldButton={"CHECKOUT"}></Button>
     </Container>
   );
