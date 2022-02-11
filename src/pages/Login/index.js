@@ -4,7 +4,7 @@ import { BsChevronLeft, BsArrowRight } from "react-icons/bs";
 
 import { inputLogin } from "../../utils/inputAuthType";
 import { UserToken } from "../../contexts/AuthContext";
-import { postSignIn } from "../../services/api";
+import api from "../../services/api";
 import Inputs from "../../components/formComponents/Inputs";
 import Button from "../../components/formComponents/Button";
 
@@ -24,7 +24,7 @@ export default function Login() {
 
     try {
       //falta validacao no front antes de enviar
-      const result = await postSignIn(data);
+      const result = await api.postSignIn(data);
       setAndPersistToken(result.data);
       navigate("/");
     } catch (err) {

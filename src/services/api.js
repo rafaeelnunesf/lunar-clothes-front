@@ -12,11 +12,13 @@ function getProducts() {
 }
 
 function postSignUp(data) {
-  return axios.post(`${BASE_URL}/auth/signup`, data);;
+  return axios.post(`${BASE_URL}/auth/signup`, data);
 }
 
 function postSignIn(data) {
-  return axios.post(`${BASE_URL}/auth/signin`, data);;
+  return axios.post(`${BASE_URL}/auth/signin`, data);
 }
 
-export { postSignUp, postSignIn , getProducts};
+const api = { configToken, getProducts, postSignUp, postSignIn };
+
+export default api;
