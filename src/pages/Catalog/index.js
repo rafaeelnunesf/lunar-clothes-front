@@ -1,6 +1,6 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Products from "../../components/Products";
+import Products from "./Products";
 import Container from "../../components/PageComponents/Container";
 
 export default function Catalog() {

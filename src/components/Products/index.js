@@ -1,62 +1,4 @@
 import styled from "styled-components";
-
-import image from "../../assets/image.svg";
-import image2 from "../../assets/image2.svg";
-export default function Products() {
-  return (
-    <ContainerProducts>
-      <Product>
-        <img src={image} alt="" />
-        <p>Mango</p>
-        <h1>T-Shirt SPANISH</h1>
-        <span>9$</span>
-      </Product>
-      <Product>
-        <img src={image2} alt="" />
-        <p>Dorothy Perkins</p>
-        <h1>Blouse</h1>
-        <span>14$</span>
-      </Product>
-      <Product>
-        <img src={image} alt="" />
-        <p>Mango</p>
-        <h1>T-Shirt SPANISH</h1>
-        <span>9$</span>
-      </Product>
-      <Product>
-        <img src={image2} alt="" />
-        <p>Dorothy Perkins</p>
-        <h1>Blouse</h1>
-        <span>14$</span>
-      </Product>
-      <Product>
-        <img src={image} alt="" />
-        <p>Mango</p>
-        <h1>T-Shirt SPANISH</h1>
-        <span>9$</span>
-      </Product>
-      <Product>
-        <img src={image2} alt="" />
-        <p>Dorothy Perkins</p>
-        <h1>Blouse</h1>
-        <span>14$</span>
-      </Product>
-      <Product>
-        <img src={image} alt="" />
-        <p>Mango</p>
-        <h1>T-Shirt SPANISH</h1>
-        <span>9$</span>
-      </Product>
-      <Product>
-        <img src={image2} alt="" />
-        <p>Dorothy Perkins</p>
-        <h1>Blouse</h1>
-        <span>14$</span>
-      </Product>
-    </ContainerProducts>
-  );
-}
-
 const ContainerProducts = styled.div`
   width: 100%;
   max-height: 650px;
@@ -112,3 +54,4 @@ const Product = styled.div`
     color: #222222;
   }
 `;
+export { ContainerProducts, Product };
