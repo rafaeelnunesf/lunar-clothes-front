@@ -1,3 +1,3 @@
 import axios from "axios";
 
-const BASE_URL = "https://mock-api.driven.com.br/api/v2/trackit";
+const BASE_URL = "https://lunar-clothes.herokuapp.com/";
