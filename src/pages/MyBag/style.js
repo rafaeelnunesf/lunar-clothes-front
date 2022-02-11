@@ -3,7 +3,8 @@ import styled from "styled-components";
 const Container = styled.div`
   background-color: #f9f9f9;
   min-height: 100vh;
-  padding: 12px 16px 0 16px;
+  max-height: 100vh;
+  padding: 12px 16px 105px 16px;
 
   display: flex;
   flex-direction: column;
@@ -20,6 +21,12 @@ const Container = styled.div`
     font-weight: 900;
     margin: 34px 0 24px 0;
     align-self: flex-start;
+  }
+
+  .listProducts {
+    width: 100%;
+    min-height: calc(100vh - 340px);
+    overflow: scroll;
   }
 
   .totalAmount {

@@ -19,6 +19,12 @@ function postSignIn(data) {
   return axios.post(`${BASE_URL}/auth/signin`, data);
 }
 
+function postBag(data, token) {
+  return axios.post(`${BASE_URL}/mybag`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
 const api = { configToken, getProducts, postSignUp, postSignIn };
 
 export default api;
