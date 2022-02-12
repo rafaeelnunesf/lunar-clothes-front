@@ -8,7 +8,7 @@ import { BoxButtons, Product } from "./style";
 export default function BoxProductBag({ data, index }) {
   return (
     <Product>
-      <img src={data.image} alt={data.name + index} />
+      <img src={data.image} alt={data.description + index} />
       <div>
         <DetailProductBag data={data} />
         <BoxButtons>

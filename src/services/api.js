@@ -19,12 +19,31 @@ function postSignIn(data) {
   return axios.post(`${BASE_URL}/auth/signin`, data);
 }
 
-function postBag(data, token) {
-  return axios.post(`${BASE_URL}/mybag`, data, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+function getSizes(id) {
+  const response = axios.get(`${BASE_URL}/catalog/${id}`);
+  return response;
 }
 
-const api = { configToken, getProducts, postSignUp, postSignIn };
+function postBag(data) {
+  const response = axios.post(`${BASE_URL}/mybag`, data);
+  console.log(response);
+  return response;
+}
+
+function getBag(token) {
+  const response = axios.get(`${BASE_URL}/mybag`);
+
+  return response;
+}
+
+const api = {
+  configToken,
+  getProducts,
+  postSignUp,
+  postSignIn,
+  getSizes,
+  postBag,
+  getBag,
+};
 
 export default api;

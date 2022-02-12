@@ -2,13 +2,13 @@ import {
   ContainerProducts,
   Product,
 } from "../../../components/Products/index.js";
-import { useContext, useEffect, useState } from "react";
-import { MyBag } from "../../../contexts/MyBagContext.js";
+import { useEffect, useState } from "react";
+
 import api from "../../../services/api.js";
 import BoxSize from "../BoxSize/index.js";
 export default function Products() {
   const [products, setProducts] = useState();
-  const { myBag, setMyBag } = useContext(MyBag);
+  const [popup, setPopup] = useState();
 
   useEffect(() => {
     getProducts();
@@ -27,15 +27,14 @@ export default function Products() {
   function clickInProduct(id) {
     const answer = window.confirm("Adicionar ao carrinho?");
     if (answer) {
-      setMyBag([...myBag, id]);
+      setPopup(id);
     }
   }
-  console.log(myBag);
 
   if (!products) return <h1>Loading</h1>;
   return (
     <ContainerProducts>
-      {products.map(({ _id, image, brand, price, description }) => (
+      {products.map(({ _id, image, brand, description, price }) => (
         <Product key={_id} onClick={() => clickInProduct(_id)}>
           <img src={image} alt="" />
           <p>{brand}</p>
@@ -43,7 +42,7 @@ export default function Products() {
           <span>{price}</span>
         </Product>
       ))}
-      <BoxSize></BoxSize>
+      {popup ? <BoxSize popup={popup} setPopup={setPopup} /> : ""}
     </ContainerProducts>
   );
 }

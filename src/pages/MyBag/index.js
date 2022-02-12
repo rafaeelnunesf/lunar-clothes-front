@@ -4,43 +4,21 @@ import { BsChevronLeft } from "react-icons/bs";
 import Button from "../../components/formComponents/Button";
 import Container from "./style";
 import Footer from "../../components/Footer";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 export default function MyBag() {
-  const productsInBag = [
-    {
-      image:
-        "https://a-static.mlcdn.com.br/1500x1500/blusa-cropped-feminino-modelo-reto-regata-alca-propria/modabarata/f64542ee55aa11eb99ce4201ac1850d5/55a9a84f262b7fd40edcad959e9dc8ea.jpg",
-      name: "Longsleeve Violeta",
-      price: "R$ 20,00",
-      color: "white",
-      size: "L",
-    },
-    {
-      image:
-        "https://a-static.mlcdn.com.br/1500x1500/blusa-cropped-feminino-modelo-reto-regata-alca-propria/modabarata/f64542ee55aa11eb99ce4201ac1850d5/55a9a84f262b7fd40edcad959e9dc8ea.jpg",
-      name: "Longsleeve Violeta",
-      price: "R$ 20,00",
-      color: "white",
-      size: "L",
-    },
-    {
-      image:
-        "https://a-static.mlcdn.com.br/1500x1500/blusa-cropped-feminino-modelo-reto-regata-alca-propria/modabarata/f64542ee55aa11eb99ce4201ac1850d5/55a9a84f262b7fd40edcad959e9dc8ea.jpg",
-      name: "Longsleeve Violeta",
-      price: "R$ 20,00",
-      color: "white",
-      size: "L",
-    },
-    {
-      image:
-        "https://a-static.mlcdn.com.br/1500x1500/blusa-cropped-feminino-modelo-reto-regata-alca-propria/modabarata/f64542ee55aa11eb99ce4201ac1850d5/55a9a84f262b7fd40edcad959e9dc8ea.jpg",
-      name: "Longsleeve Violeta",
-      price: "R$ 20,00",
-      color: "white",
-      size: "L",
-    },
-  ];
+  const [productsInBag, setProductsInBag] = useState();
 
+  useEffect(() => {
+    const request = api.getBag();
+    request.then((response) => {
+      setProductsInBag(response.data);
+    });
+  }, []);
+  console.log(productsInBag);
+
+  if (!productsInBag || productsInBag.length === 0) return <h1>Loading</h1>;
   return (
     <Container>
       <BsChevronLeft className="headerIcon" />
