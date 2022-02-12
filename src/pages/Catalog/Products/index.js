@@ -3,17 +3,17 @@ import {
   Product,
 } from "../../../components/Products/index.js";
 import { useEffect, useState } from "react";
-import api from "../../../services/api.js";
+import { getProducts } from "../../../services/api.js";
 export default function Products() {
   const [products, setProducts] = useState();
 
   useEffect(() => {
-    getProducts();
+    getProductsFromApi();
   }, []);
 
-  async function getProducts() {
+  async function getProductsFromApi() {
     try {
-      const dataEntries = await api.getProducts();
+      const dataEntries = await getProducts();
       console.log(dataEntries);
       setProducts(dataEntries.data);
     } catch (error) {
@@ -28,7 +28,7 @@ export default function Products() {
           <img src={image} alt="" />
           <p>{brand}</p>
           <h1>{description}</h1>
-          <span>{price}</span>
+          <span>{`R$ ${price}`}</span>
         </Product>
       ))}
     </ContainerProducts>
