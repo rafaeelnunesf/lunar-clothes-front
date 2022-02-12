@@ -25,7 +25,7 @@ export default function MyBag() {
       <h2>Carrinho</h2>
       <div className="listProducts">
         {productsInBag.map((product, i) => (
-          <BoxProductBag data={product} index={i} />
+          <BoxProductBag data={product} index={i} key={i} />
         ))}
       </div>
       <div className="totalAmount">

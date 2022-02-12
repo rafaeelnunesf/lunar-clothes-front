@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   background-color: #f9f9f9;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100vh;
   padding: 12px 16px 105px 16px;
 
   display: flex;
@@ -25,7 +24,7 @@ const Container = styled.div`
 
   .listProducts {
     width: 100%;
-    min-height: calc(100vh - 340px);
+    height: calc(100vh - 357px);
     overflow: scroll;
   }
 

@@ -24,18 +24,11 @@ export default function Products() {
     }
   }
 
-  function clickInProduct(id) {
-    const answer = window.confirm("Adicionar ao carrinho?");
-    if (answer) {
-      setPopup(id);
-    }
-  }
-
   if (!products) return <h1>Loading</h1>;
   return (
     <ContainerProducts>
       {products.map(({ _id, image, brand, description, price }) => (
-        <Product key={_id} onClick={() => clickInProduct(_id)}>
+        <Product key={_id} onClick={() => setPopup(_id)}>
           <img src={image} alt="" />
           <p>{brand}</p>
           <h1>{description}</h1>

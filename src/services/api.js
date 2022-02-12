@@ -20,20 +20,15 @@ function postSignIn(data) {
 }
 
 function getSizes(id) {
-  const response = axios.get(`${BASE_URL}/catalog/${id}`);
-  return response;
+  return axios.get(`${BASE_URL}/catalog/${id}`);
 }
 
 function postBag(data) {
-  const response = axios.post(`${BASE_URL}/mybag`, data);
-  console.log(response);
-  return response;
+  return axios.post(`${BASE_URL}/mybag`, data);
 }
 
 function getBag(token) {
-  const response = axios.get(`${BASE_URL}/mybag`);
-
-  return response;
+  return axios.get(`${BASE_URL}/mybag`);
 }
 
 const api = {
