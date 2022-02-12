@@ -1,9 +1,9 @@
-import "@fontsource/metropolis";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import UserTokenProvider from "./contexts/AuthContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Catalog from "./pages/Catalog";
+import "@fontsource/metropolis";
 
 export default function App() {
   return (
