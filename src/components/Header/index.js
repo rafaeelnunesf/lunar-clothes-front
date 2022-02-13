@@ -14,7 +14,8 @@ export default function Header({ page, hasSearch }) {
 }
 
 const ContainerHeader = styled.div`
-  max-width: 100%;
+  max-width: 100vw;
+  margin: 0 -16px;
 
   div {
     min-height: 70px;
