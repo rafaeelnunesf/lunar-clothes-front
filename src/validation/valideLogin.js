@@ -5,7 +5,7 @@ export default async function valideLogin(setAndPersistToken, navigate, data) {
   if (!data.email || !data.password) {
     return { field: "Todos", message: "Preencha todos os campos!" };
   } else if (!data.email.includes("@")) {
-    return { field: "email", message: "E-mail incorreto!" };
+    return { field: "email", message: "Formato inválido de e-mail!" };
   } else {
     try {
       const result = await api.postSignIn(data);

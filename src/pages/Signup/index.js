@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsChevronLeft, BsArrowRight } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import api from "../../services/api";
-import { inputRegister } from "../../utils/inputAuthType";
+import valideRegistration from "../../validation/valideRegistration";
+import { initInputRegister } from "../../utils/inputAuthType";
 import Button from "../../components/formComponents/Button";
 import Inputs from "../../components/formComponents/Inputs";
 
@@ -15,24 +15,26 @@ import {
 
 export default function Signup() {
   const [data, setData] = useState({});
+  const [inputRegister, setinputRegister] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    initInputRegister(setinputRegister);
+  }, []);
 
   async function registrationNewUser(event) {
     event.preventDefault();
 
-    try {
-      //falta validação no front antes de enviar
-      await api.postSignUp(data);
-      console.log("deu certo!");
-    } catch (err) {
-      console.log(err);
-    }
+    const error = await valideRegistration(data, navigate);
+    initInputRegister(setinputRegister, error);
   }
 
+  if (!inputRegister) return <h1>Carregando...</h1>;
   return (
     <ContainerAuth>
       <BsChevronLeft className="headerIcon" />
       <h2>Cadastre-se</h2>
-      <FormContainer onSubmit={registrationNewUser}>
+      <FormContainer onSubmit={registrationNewUser} noValidate>
         <Inputs inputs={inputRegister} data={data} setData={setData} />
         <CustomLink>
           <Link to="/entrar">

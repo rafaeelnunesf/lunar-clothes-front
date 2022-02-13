@@ -6,18 +6,18 @@ export default async function valideRegistration(data, navigate) {
 
   if (!data.name || !data.email || !data.password) {
     return { field: "Todos", message: "Preencha todos os campos!" };
+  } else if (!data.email.includes("@")) {
+    return { field: "email", message: "Formato inválido de e-mail!" };
   } else if (!regex.test(data.password)) {
     return { field: "password", message: "Senha com ao menos 8 caracteres!" };
-  } else if (data.password !== data.password_confirm) {
-    return { field: "password", message: "As senhas precisam ser iguais!" };
   } else {
     try {
-      const redirect = await api.postSignUp(data);
+      await api.postSignUp(data);
 
       navigate("/entrar");
     } catch (err) {
       if (err.message.includes(409)) {
-        return { field: "Todos", message: "E-mail já cadastrado!" };
+        return { field: "email", message: "E-mail já cadastrado!" };
       } else if (err.message.includes(422)) {
         return { field: "Todos", message: "Dados no formato incorreto!" };
       } else if (err.message.includes(500)) {
@@ -37,6 +37,4 @@ export default async function valideRegistration(data, navigate) {
       }
     }
   }
-
-  return;
 }

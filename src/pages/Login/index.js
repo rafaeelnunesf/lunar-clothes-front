@@ -28,7 +28,6 @@ export default function Login() {
     event.preventDefault();
 
     const error = await valideLogin(setAndPersistToken, navigate, data);
-    console.log(error);
     initInputLogin(setInputLogin, error);
   }
 
