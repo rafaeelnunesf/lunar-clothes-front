@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BsChevronLeft, BsArrowRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 import api from "../../services/api";
 import { inputRegister } from "../../utils/inputAuthType";
@@ -33,9 +34,11 @@ export default function Signup() {
       <h2>Cadastre-se</h2>
       <FormContainer onSubmit={registrationNewUser}>
         <Inputs inputs={inputRegister} data={data} setData={setData} />
-        <CustomLink to="/login">
-          <span>Já tem uma conta?</span>
-          <BsArrowRight className="iconLink" />
+        <CustomLink>
+          <Link to="/entrar">
+            <span>Já tem uma conta?</span>
+            <BsArrowRight className="iconLink" />
+          </Link>
         </CustomLink>
         <Button fieldButton={"CADASTRAR"} />
       </FormContainer>

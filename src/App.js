@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserTokenProvider from "./contexts/AuthContext";
-import "@fontsource/metropolis";
 
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
