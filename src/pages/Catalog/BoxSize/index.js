@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import Button from "../../../components/formComponents/Button";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../../services/api";
+import { UserToken } from "../../../contexts/AuthContext";
+
+import Button from "../../../components/formComponents/Button";
+import valideSizeProduct from "../../../validation/valideSizeProduct";
 import { Box, ButtonSize, PopUp } from "./style";
 
 export default function BoxSize({ popup, setPopup }) {
   const [size, setSize] = useState();
   const [selectSize, setSelectSize] = useState();
+  const { token } = useContext(UserToken);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!size) {
-      return requestSizes();
-    }
+    requestSizes();
     // eslint-disable-next-line
   }, []);
 
@@ -26,41 +29,17 @@ export default function BoxSize({ popup, setPopup }) {
 
   async function addMyBag(e) {
     e.preventDefault();
-
-    if (selectSize === undefined) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Choose a size!",
-      });
-      return;
-    }
-    try {
-      const data = {
-        id: popup,
-        size: size[selectSize],
-      };
-      const response = await api.postBag(data);
-      setPopup();
-      Swal.fire({
-        icon: "success",
-        title: "product added successfully!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    console.log(token);
+    await valideSizeProduct(selectSize, popup, setPopup, navigate, token);
   }
 
-  function handleClick(i) {
-    if (selectSize === i) {
+  function handleClick(oneSize) {
+    if (selectSize === oneSize) {
       setSelectSize();
     } else {
-      setSelectSize(i);
+      setSelectSize(oneSize);
     }
   }
-  console.log(popup);
 
   return (
     <Box>
@@ -71,8 +50,8 @@ export default function BoxSize({ popup, setPopup }) {
             {size?.map((oneSize, i) => (
               <ButtonSize
                 key={i}
-                onClick={() => handleClick(i)}
-                select={selectSize === i}
+                onClick={() => handleClick(oneSize)}
+                select={selectSize === oneSize}
                 type="button"
               >
                 {oneSize}

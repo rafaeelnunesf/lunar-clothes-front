@@ -11,7 +11,7 @@ export default async function valideLogin(setAndPersistToken, navigate, data) {
       const result = await api.postSignIn(data);
 
       setAndPersistToken(result.data);
-      navigate("/catalog");
+      navigate("/");
     } catch (err) {
       if (err.message.includes(404)) {
         return { field: "email", message: "E-mail não encontrado!" };
