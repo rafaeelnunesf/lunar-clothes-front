@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { BsChevronLeft, BsArrowRight } from "react-icons/bs";
 
-import { inputLogin } from "../../utils/inputAuthType";
+import valideLogin from "../../validation/valideLogin";
+import { initInputLogin } from "../../utils/inputAuthType";
 import { UserToken } from "../../contexts/AuthContext";
-import api from "../../services/api";
 import Inputs from "../../components/formComponents/Inputs";
 import Button from "../../components/formComponents/Button";
 
@@ -16,31 +16,33 @@ import {
 
 export default function Login() {
   const [data, setData] = useState({});
+  const [inputLogin, setInputLogin] = useState();
   const { setAndPersistToken } = useContext(UserToken);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    initInputLogin(setInputLogin);
+  }, []);
 
   async function login(event) {
     event.preventDefault();
 
-    try {
-      //falta validacao no front antes de enviar
-      const result = await api.postSignIn(data);
-      setAndPersistToken(result.data);
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-    }
+    const error = await valideLogin(setAndPersistToken, navigate, data);
+    initInputLogin(setInputLogin, error);
   }
 
+  if (!inputLogin) return <h1>Carregando...</h1>;
   return (
     <ContainerAuth>
       <BsChevronLeft className="headerIcon" />
       <h2>Entrar</h2>
-      <FormContainer onSubmit={login}>
+      <FormContainer onSubmit={login} noValidate>
         <Inputs inputs={inputLogin} data={data} setData={setData} />
-        <CustomLink to="/cadastro">
-          <span>Não possui conta?</span>
-          <BsArrowRight className="iconLink" />
+        <CustomLink>
+          <Link to="/cadastro">
+            <span>Não possui conta?</span>
+            <BsArrowRight className="iconLink" />
+          </Link>
         </CustomLink>
         <Button fieldButton={"ENTRAR"} />
       </FormContainer>
