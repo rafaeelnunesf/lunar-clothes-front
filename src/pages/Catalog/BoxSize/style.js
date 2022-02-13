@@ -48,9 +48,11 @@ const ButtonSize = styled.button`
   all: unset;
   width: 100px;
   height: 40px;
-  background-color: ${({ select, index }) =>
-    select === index ? "#9b9b9b" : "white"};
-  border: 0.4px solid #9b9b9b;
+
+  background: ${({ select }) => (select ? "#db3022" : "#ffffff")};
+  color: ${({ select }) => (select ? "#FFF" : "#000")};
+  border: 0.4px solid ${({ select }) => (select ? "#db3022" : "#9b9b9b")};
+
   border-radius: 8px;
   font-size: 14px;
 

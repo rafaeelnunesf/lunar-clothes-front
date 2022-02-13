@@ -1,8 +1,5 @@
-import {
-  ContainerProducts,
-  Product,
-} from "../../../components/Products/index.js";
 import { useEffect, useState } from "react";
+import { ContainerProducts, Product } from "../../../style/Products/index.js";
 
 import api from "../../../services/api.js";
 import BoxSize from "../BoxSize/index.js";
@@ -11,13 +8,12 @@ export default function Products() {
   const [popup, setPopup] = useState();
 
   useEffect(() => {
-    getProducts();
+    getProductsFromApi();
   }, []);
 
-  async function getProducts() {
+  async function getProductsFromApi() {
     try {
       const dataEntries = await api.getProducts();
-      console.log(dataEntries);
       setProducts(dataEntries.data);
     } catch (error) {
       console.log(error);

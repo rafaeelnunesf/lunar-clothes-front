@@ -14,11 +14,11 @@ export default function Header() {
 }
 
 const ContainerHeader = styled.div`
-  max-width: 375px;
+  max-width: 100%;
 
   div {
-    min-height: 44px;
-    max-height: 44px;
+    min-height: 70px;
+    max-height: 70px;
     background-color: #fff;
     display: flex;
     justify-content: space-between;
@@ -30,7 +30,7 @@ const ContainerHeader = styled.div`
     font-family: Metropolis;
     font-weight: 600;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 25px;
 
     text-align: center;
     color: #222222;

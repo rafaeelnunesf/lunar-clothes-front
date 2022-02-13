@@ -1,7 +1,7 @@
 import styled from "styled-components";
 const ContainerProducts = styled.div`
   width: 100%;
-  max-height: 650px;
+  max-height: 80%;
   overflow: scroll;
   margin: auto;
   box-sizing: border-box;
@@ -14,6 +14,7 @@ const ContainerProducts = styled.div`
 
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 
   row-gap: 20px;
   column-gap: 17px;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import Button from "../../../components/formComponents/Button";
 import api from "../../../services/api";
 import { Box, ButtonSize, PopUp } from "./style";
@@ -17,8 +18,16 @@ export default function BoxSize({ popup, setPopup }) {
 
   async function addMyBag(e) {
     e.preventDefault();
-
+    console.log(selectSize);
     try {
+      if (selectSize === undefined) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Choose a size!",
+        });
+        return;
+      }
       const data = {
         id: popup,
         size: size[selectSize],
@@ -26,8 +35,22 @@ export default function BoxSize({ popup, setPopup }) {
       const response = await api.postBag(data);
       console.log(response);
       setPopup();
+      Swal.fire({
+        icon: "success",
+        title: "product added successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  function handleClick(i) {
+    if (selectSize === i) {
+      setSelectSize();
+    } else {
+      setSelectSize(i);
     }
   }
 
@@ -41,9 +64,8 @@ export default function BoxSize({ popup, setPopup }) {
             {size?.map((oneSize, i) => (
               <ButtonSize
                 key={i}
-                onClick={() => setSelectSize(i)}
-                index={i}
-                select={selectSize}
+                onClick={() => handleClick(i)}
+                select={selectSize === i}
                 type="button"
               >
                 {oneSize}
