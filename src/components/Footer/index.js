@@ -39,15 +39,16 @@ const ContainerFooter = styled.div`
   background: #fff;
   border-radius: 12px 12px 0px 0px;
   height: 83px;
-  max-width: 100%;
+  width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 25px;
 
-  position: sticky;
-  top: 100%;
+  position: fixed;
+
+  bottom: 0;
   z-index: 1;
   box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.08);
 `;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsChevronLeft, BsArrowRight } from "react-icons/bs";
 
-import { postSignUp } from "../../services/api";
+import api from "../../services/api";
 import { inputRegister } from "../../utils/inputAuthType";
 import Button from "../../components/formComponents/Button";
 import Inputs from "../../components/formComponents/Inputs";
@@ -20,7 +20,7 @@ export default function Signup() {
 
     try {
       //falta validação no front antes de enviar
-      await postSignUp(data);
+      await api.postSignUp(data);
       console.log("deu certo!");
     } catch (err) {
       console.log(err);

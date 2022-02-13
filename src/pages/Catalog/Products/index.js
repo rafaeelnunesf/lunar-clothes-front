@@ -1,37 +1,37 @@
+import { useEffect, useState } from "react";
 import { ContainerProducts, Product } from "../../../style/Products/index.js";
-import { useContext, useEffect, useState } from "react";
-import { getProducts } from "../../../services/api.js";
-import { productsContext } from "../../../contexts/ProductContext.js";
-export default function Products({ isSelected, setIsSelected }) {
+
+import api from "../../../services/api.js";
+import BoxSize from "../BoxSize/index.js";
+export default function Products() {
   const [products, setProducts] = useState();
-  const { setSelectedProduct } = useContext(productsContext);
+  const [popup, setPopup] = useState();
+
   useEffect(() => {
     getProductsFromApi();
   }, []);
 
   async function getProductsFromApi() {
     try {
-      const dataEntries = await getProducts();
+      const dataEntries = await api.getProducts();
       setProducts(dataEntries.data);
     } catch (error) {
       console.log(error);
     }
   }
-  function handleClick(item) {
-    isSelected ? setIsSelected(false) : setIsSelected(true);
-    setSelectedProduct(item);
-  }
+
   if (!products) return <h1>Loading</h1>;
   return (
     <ContainerProducts>
-      {products.map((item) => (
-        <Product key={item._id} onClick={() => handleClick(item)}>
-          <img src={item.image} alt="" />
-          <p>{item.brand}</p>
-          <h1>{item.description}</h1>
-          <span>{`R$ ${item.price}`}</span>
+      {products.map(({ _id, image, brand, description, price }) => (
+        <Product key={_id} onClick={() => setPopup(_id)}>
+          <img src={image} alt="" />
+          <p>{brand}</p>
+          <h1>{description}</h1>
+          <span>{price}</span>
         </Product>
       ))}
+      {popup ? <BoxSize popup={popup} setPopup={setPopup} /> : ""}
     </ContainerProducts>
   );
 }

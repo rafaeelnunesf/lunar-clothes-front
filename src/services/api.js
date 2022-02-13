@@ -15,4 +15,25 @@ function postSignIn(data) {
   return axios.post(`${BASE_URL}/auth/signin`, data);
 }
 
-export { postSignUp, postSignIn, getProducts };
+function getSizes(id) {
+  return axios.get(`${BASE_URL}/catalog/${id}`);
+}
+
+function postBag(data) {
+  return axios.post(`${BASE_URL}/mybag`, data);
+}
+
+function getBag(token) {
+  return axios.get(`${BASE_URL}/mybag`);
+}
+
+const api = {
+  getProducts,
+  postSignUp,
+  postSignIn,
+  getSizes,
+  postBag,
+  getBag,
+};
+
+export default api;
