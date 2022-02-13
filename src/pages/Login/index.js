@@ -28,7 +28,6 @@ export default function Login() {
     event.preventDefault();
 
     const error = await valideLogin(setAndPersistToken, navigate, data);
-    inputEl.current.focus();
     initInputLogin(setInputLogin, error);
   }
 
