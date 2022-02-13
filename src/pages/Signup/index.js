@@ -5,6 +5,7 @@ import api from "../../services/api";
 import { inputRegister } from "../../utils/inputAuthType";
 import Button from "../../components/formComponents/Button";
 import Inputs from "../../components/formComponents/Inputs";
+import { useNavigate } from "react-router-dom";
 
 import {
   ContainerAuth,
@@ -14,6 +15,7 @@ import {
 
 export default function Signup() {
   const [data, setData] = useState({});
+  let navigate = useNavigate();
 
   async function registrationNewUser(event) {
     event.preventDefault();
@@ -29,11 +31,11 @@ export default function Signup() {
 
   return (
     <ContainerAuth>
-      <BsChevronLeft className="headerIcon" />
+      <BsChevronLeft className="headerIcon" onClick={() => navigate(-1)} />
       <h2>Cadastre-se</h2>
       <FormContainer onSubmit={registrationNewUser}>
         <Inputs inputs={inputRegister} data={data} setData={setData} />
-        <CustomLink to="/login">
+        <CustomLink to="/entrar">
           <span>Já tem uma conta?</span>
           <BsArrowRight className="iconLink" />
         </CustomLink>
