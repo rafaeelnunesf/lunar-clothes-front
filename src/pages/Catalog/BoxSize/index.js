@@ -29,7 +29,7 @@ export default function BoxSize({ popup, setPopup }) {
 
   async function addMyBag(e) {
     e.preventDefault();
-    console.log(token);
+
     await valideSizeProduct(selectSize, popup, setPopup, navigate, token);
   }
 

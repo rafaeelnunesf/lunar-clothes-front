@@ -28,7 +28,7 @@ function postBag(data, token) {
 }
 
 function getBag(token) {
-  return axios.get(`${BASE_URL}/mybag`);
+  return axios.get(`${BASE_URL}/mybag`, configToken(token));
 }
 
 const api = {

@@ -1,24 +1,39 @@
 import BoxProductBag from "./BoxProductBag";
 import { BsChevronLeft } from "react-icons/bs";
 
-import Button from "../../components/formComponents/Button";
-import Container from "./style";
-import Footer from "../../components/Footer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
+import { UserToken } from "../../contexts/AuthContext";
+
+import Button from "../../components/formComponents/Button";
+import Footer from "../../components/Footer";
+import Container from "./style";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function MyBag() {
   const [productsInBag, setProductsInBag] = useState();
+  const { token } = useContext(UserToken);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const request = api.getBag();
-    request.then((response) => {
-      setProductsInBag(response.data);
-    });
+    if (token) {
+      const request = api.getBag(token);
+      request.then((response) => {
+        setProductsInBag(response.data);
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Faça login!",
+      });
+      navigate("/entrar");
+    }
+    // eslint-disable-next-line
   }, []);
-  console.log(productsInBag);
 
-  if (!productsInBag || productsInBag.length === 0) return <h1>Loading</h1>;
+  if (!productsInBag) return <h1>Loading</h1>;
   return (
     <Container>
       <BsChevronLeft className="headerIcon" />

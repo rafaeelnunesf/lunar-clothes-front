@@ -22,26 +22,35 @@ export default async function valideSizeProduct(
     size: selectSize,
   };
 
-  try {
-    await api.postBag(data, token.token);
-    setPopup();
+  if (token) {
+    try {
+      await api.postBag(data, token);
+      setPopup();
 
-    Swal.fire({
-      icon: "success",
-      title: "product added successfully!",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  } catch (err) {
-    if (err.message.includes(401)) {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Você precisa fazer login!",
+        icon: "success",
+        title: "product added successfully!",
+        showConfirmButton: false,
+        timer: 1500,
       });
-      navigate("/entrar");
-    } else {
-      console.log(err);
+    } catch (err) {
+      if (err.message.includes(401)) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Você precisa fazer login!",
+        });
+        navigate("/entrar");
+      } else {
+        console.log(err);
+      }
     }
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Você precisa fazer login!",
+    });
+    navigate("/entrar");
   }
 }
