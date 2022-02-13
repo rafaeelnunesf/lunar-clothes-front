@@ -9,31 +9,38 @@ export default function BoxSize({ popup, setPopup }) {
   const [selectSize, setSelectSize] = useState();
 
   useEffect(() => {
-    const request = api.getSizes(popup);
-    request.then((response) => {
-      setSize(response.data);
-    });
+    if (!size) {
+      return requestSizes();
+    }
     // eslint-disable-next-line
   }, []);
 
+  async function requestSizes() {
+    try {
+      const response = await api.getSizes(popup);
+      setSize(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async function addMyBag(e) {
     e.preventDefault();
-    console.log(selectSize);
+
+    if (selectSize === undefined) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Choose a size!",
+      });
+      return;
+    }
     try {
-      if (selectSize === undefined) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Choose a size!",
-        });
-        return;
-      }
       const data = {
         id: popup,
         size: size[selectSize],
       };
       const response = await api.postBag(data);
-      console.log(response);
       setPopup();
       Swal.fire({
         icon: "success",
@@ -53,11 +60,11 @@ export default function BoxSize({ popup, setPopup }) {
       setSelectSize(i);
     }
   }
+  console.log(popup);
 
-  if (!size) return <h1>Loading</h1>;
   return (
     <Box>
-      <PopUp>
+      <PopUp show={size}>
         <p>Selecione o tamanho</p>
         <form onSubmit={addMyBag}>
           <div className="listSizes">
