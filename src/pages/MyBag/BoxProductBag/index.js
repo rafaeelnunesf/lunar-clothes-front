@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoAddOutline, IoRemoveOutline } from "react-icons/io5";
 import { IoMdTrash } from "react-icons/io";
 import Fab from "@mui/material/Fab";
@@ -12,6 +12,10 @@ import api from "../../../services/api";
 export default function BoxProductBag({ data, reload }) {
   const [quantity, setQuantity] = useState(data.quantity);
   const { token } = useContext(UserToken);
+
+  useEffect(() => {
+    reload();
+  }, [quantity]);
 
   async function deleteProductBag() {
     try {
@@ -31,16 +35,19 @@ export default function BoxProductBag({ data, reload }) {
   }
 
   async function controlQuantity(id, add) {
-    if (add) {
-      setQuantity(quantity + 1);
-      await api.updateQuantityProduct(id, token, quantity + 1);
-    } else if (!add && quantity === 1) {
-      setQuantity(1);
-    } else {
-      setQuantity(quantity - 1);
-      await api.updateQuantityProduct(id, token, quantity - 1);
+    try {
+      if (add) {
+        setQuantity(quantity + 1);
+        await api.updateQuantityProduct(id, token, quantity + 1);
+      } else if (!add && quantity === 1) {
+        setQuantity(1);
+      } else {
+        setQuantity(quantity - 1);
+        await api.updateQuantityProduct(id, token, quantity - 1);
+      }
+    } catch (err) {
+      console.log(err);
     }
-    reload();
   }
 
   return (
@@ -55,7 +62,7 @@ export default function BoxProductBag({ data, reload }) {
           >
             <IoRemoveOutline />
           </Fab>
-          <span>{data.quantity}</span>
+          <span>{quantity}</span>
           <Fab aria-label="add" onClick={() => controlQuantity(data._id, true)}>
             <IoAddOutline />
           </Fab>
