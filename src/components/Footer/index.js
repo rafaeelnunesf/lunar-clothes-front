@@ -3,27 +3,30 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { BsHandbag, BsShop } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { useLocation, useNavigate } from "react-router-dom";
+import { pathWithoutFooter } from "../../App";
 export default function Footer() {
   let navigate = useNavigate();
   let currentLocation = useLocation().pathname;
 
-  console.log(currentLocation);
-
   function handleClick(e, location) {
-    let colorSvg = e.children[0].style;
-    let colorLabel = e.children[1].style;
-    colorLabel.color === "red"
-      ? (colorLabel.color = "#9B9B9B")
-      : (colorLabel.color = "red");
-    colorSvg.color === "red"
-      ? (colorSvg.color = "#9B9B9B")
-      : (colorSvg.color = "red");
+    // let colorSvg = e.children[0].style;
+    // let colorLabel = e.children[1].style;
+    // colorLabel.color === "red"
+    //   ? (colorLabel.color = "#9B9B9B")
+    //   : (colorLabel.color = "red");
+    // colorSvg.color === "red"
+    //   ? (colorSvg.color = "#9B9B9B")
+    //   : (colorSvg.color = "red");
 
     navigate(location);
   }
+  if (pathWithoutFooter.includes(currentLocation)) {
+    return null;
+  }
+
   const arrayIcons = [
     { icon: <BsShop />, label: "Shop", location: "/" },
-    { icon: <BsHandbag />, label: "Bag", location: "/cart" },
+    { icon: <BsHandbag />, label: "Bag", location: "/mybag" },
     { icon: <MdOutlinePersonOutline />, label: "Profile", location: "/login" },
   ];
   return (
