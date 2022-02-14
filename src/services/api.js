@@ -34,6 +34,14 @@ function deleteProduct(id, token) {
   return axios.delete(`${BASE_URL}/mybag/${id}`, createConfig(token));
 }
 
+function updateQuantityProduct(id, token, quantity) {
+  return axios.put(
+    `${BASE_URL}/mybag/${id}`,
+    { quantity },
+    createConfig(token)
+  );
+}
+
 function postAddress(data, token) {
   const config = createConfig(token);
   return axios.post(`${BASE_URL}/add-new-address`, data, config);
@@ -67,6 +75,7 @@ const api = {
   getAddress,
   getPaymentMethod,
   deleteProduct,
+  updateQuantityProduct,
   deleteMyBagProducts,
 };
 

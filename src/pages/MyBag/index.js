@@ -8,7 +8,6 @@ import { UserToken } from "../../contexts/AuthContext";
 
 import BoxProductBag from "./BoxProductBag";
 import Button from "../../components/formComponents/Button";
-import Footer from "../../components/Footer";
 import Container from "./style";
 
 export default function MyBag() {
@@ -26,7 +25,6 @@ export default function MyBag() {
         title: "Oops...",
         text: "Faça login!",
       });
-      navigate("/");
       navigate("/login");
     }
     // eslint-disable-next-line
@@ -38,7 +36,9 @@ export default function MyBag() {
       setProductsInBag(response.data);
 
       let soma = 0;
-      response.data.map((product) => (soma += product.price));
+      response.data.map(
+        (product) => (soma += product.price * product.quantity)
+      );
       setTotal(soma);
     } catch (err) {
       console.log(err);
@@ -49,26 +49,27 @@ export default function MyBag() {
   return (
     <Container>
       <BsChevronLeft className="headerIcon" />
-      <h2>Cart</h2>
-      <div className="listProducts">
-        {productsInBag.length === 0 ? (
-          <h3>Your cart is empty!</h3>
-        ) : (
-          productsInBag.map((product) => (
-            <BoxProductBag
-              data={product}
-              key={product._id}
-              reload={initProductsInBag}
-            />
-          ))
-        )}
-      </div>
-      <div className="totalAmount">
-        <p>Total value:</p>
-        <span>R$ {total}</span>
-      </div>
-      <Button fieldButton={"CHECKOUT"}></Button>
-      <Footer />
+      <h2>My bag</h2>
+      <form onSubmit={() => navigate("/checkout")}>
+        <div className="listProducts">
+          {productsInBag.length === 0 ? (
+            <h3>Your cart is empty!</h3>
+          ) : (
+            productsInBag.map((product) => (
+              <BoxProductBag
+                data={product}
+                key={product._id}
+                reload={initProductsInBag}
+              />
+            ))
+          )}
+        </div>
+        <div className="totalAmount">
+          <p>Total value:</p>
+          <span>R$ {total}</span>
+        </div>
+        <Button fieldButton={"CHECKOUT"}></Button>
+      </form>
     </Container>
   );
 }

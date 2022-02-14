@@ -26,6 +26,10 @@ const Container = styled.div`
     color: #9b9b9b;
   }
 
+  form {
+    width: 100%;
+  }
+
   .listProducts {
     width: 100%;
     height: calc(100vh - 357px);
