@@ -11,7 +11,10 @@ export default function Payment({ children }) {
   const { token } = useContext(UserToken);
   const [setPaymentActive, paymentData, setPaymentData] = children;
 
-  useEffect(() => getAddressFromAPI(), []);
+  useEffect(() => {
+    getAddressFromAPI();
+    // eslint-disable-next-line
+  }, []);
   async function getAddressFromAPI() {
     try {
       const payment = await api.getPaymentMethod(token);

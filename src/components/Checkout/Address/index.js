@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import TitleSection from "../TitleSection";
 import ChangeButton from "../ChangeButton";
@@ -10,7 +10,10 @@ export default function Address({ children }) {
   const { token } = useContext(UserToken);
   const [setAddressActive, addressData, setAddressData] = children;
 
-  useEffect(() => getAddressFromAPI(), []);
+  useEffect(() => {
+    getAddressFromAPI();
+    // eslint-disable-next-line
+  }, []);
   async function getAddressFromAPI() {
     try {
       const address = await api.getAddress(token);

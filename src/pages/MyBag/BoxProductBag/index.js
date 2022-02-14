@@ -15,6 +15,7 @@ export default function BoxProductBag({ data, reload }) {
 
   useEffect(() => {
     reload();
+    // eslint-disable-next-line
   }, [quantity]);
 
   async function deleteProductBag() {
