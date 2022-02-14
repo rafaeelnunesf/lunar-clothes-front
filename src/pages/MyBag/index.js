@@ -8,7 +8,6 @@ import { UserToken } from "../../contexts/AuthContext";
 
 import BoxProductBag from "./BoxProductBag";
 import Button from "../../components/formComponents/Button";
-import Footer from "../../components/Footer";
 import Container from "./style";
 
 export default function MyBag() {
@@ -50,7 +49,7 @@ export default function MyBag() {
   return (
     <Container>
       <BsChevronLeft className="headerIcon" />
-      <h2>Cart</h2>
+      <h2>My bag</h2>
       <form onSubmit={() => navigate("/checkout")}>
         <div className="listProducts">
           {productsInBag.length === 0 ? (
