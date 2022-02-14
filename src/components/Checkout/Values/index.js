@@ -11,7 +11,7 @@ export default function Values() {
         <h1>Delivery</h1>
         <p>15$</p>
       </TypeValue>
-      <TypeValue summary={true}>
+      <TypeValue summary="true">
         <h1>Summary</h1>
         <p>127$</p>
       </TypeValue>
