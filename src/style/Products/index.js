@@ -1,11 +1,9 @@
 import styled from "styled-components";
 const ContainerProducts = styled.div`
-  width: 100%;
+  max-width: 100vw;
   max-height: 80%;
   overflow: scroll;
-  margin: auto;
   box-sizing: border-box;
-  padding: 0 16px;
   ::-webkit-scrollbar {
     display: none;
   }

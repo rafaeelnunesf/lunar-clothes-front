@@ -32,7 +32,7 @@ export default function Signup() {
   if (!inputRegister) return <h1>Carregando...</h1>;
   return (
     <ContainerAuth>
-      <BsChevronLeft className="headerIcon" />
+      <BsChevronLeft className="headerIcon" onClick={() => navigate(-1)} />
       <h2>Cadastre-se</h2>
       <FormContainer onSubmit={registrationNewUser} noValidate>
         <Inputs inputs={inputRegister} data={data} setData={setData} />

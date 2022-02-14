@@ -3,10 +3,9 @@ import axios from "axios";
 // const BASE_URL = "https://lunar-clothes.herokuapp.com";
 const BASE_URL = "http://localhost:5000";
 
-function configToken(token) {
+function createConfig(token) {
   return { headers: { Authorization: `Bearer ${token}` } };
 }
-
 function getProducts() {
   return axios.get(`${BASE_URL}/catalog`);
 }
@@ -24,15 +23,32 @@ function getSizes(id) {
 }
 
 function postBag(data, token) {
-  return axios.post(`${BASE_URL}/mybag`, data, configToken(token));
+  return axios.post(`${BASE_URL}/mybag`, data, createConfig(token));
 }
 
 function getBag(token) {
-  return axios.get(`${BASE_URL}/mybag`, configToken(token));
+  return axios.get(`${BASE_URL}/mybag`, createConfig(token));
 }
 
 function deleteProduct(id, token) {
-  return axios.delete(`${BASE_URL}/mybag/${id}`, configToken(token));
+  return axios.delete(`${BASE_URL}/mybag/${id}`, createConfig(token));
+}
+
+function postAddress(data, token) {
+  const config = createConfig(token);
+  return axios.post(`${BASE_URL}/add-new-address`, data, config);
+}
+function postPaymentMethod(data, token) {
+  const config = createConfig(token);
+  return axios.post(`${BASE_URL}/add-new-payment-method`, data, config);
+}
+function getAddress(token) {
+  const config = createConfig(token);
+  return axios.get(`${BASE_URL}/add-new-address`, config);
+}
+function getPaymentMethod(token) {
+  const config = createConfig(token);
+  return axios.get(`${BASE_URL}/add-new-payment-method`, config);
 }
 
 const api = {
@@ -42,6 +58,10 @@ const api = {
   getSizes,
   postBag,
   getBag,
+  postAddress,
+  postPaymentMethod,
+  getAddress,
+  getPaymentMethod,
   deleteProduct,
 };
 

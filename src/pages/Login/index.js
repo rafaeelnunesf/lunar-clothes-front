@@ -34,7 +34,7 @@ export default function Login() {
   if (!inputLogin) return <h1>Carregando...</h1>;
   return (
     <ContainerAuth>
-      <BsChevronLeft className="headerIcon" />
+      <BsChevronLeft className="headerIcon" onClick={() => navigate(-1)} />
       <h2>Entrar</h2>
       <FormContainer onSubmit={login} noValidate>
         <Inputs inputs={inputLogin} data={data} setData={setData} />
