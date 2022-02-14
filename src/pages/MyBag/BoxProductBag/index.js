@@ -61,7 +61,7 @@ export default function BoxProductBag({ data, reload }) {
           </Fab>
         </BoxButtons>
       </div>
-      <p className="price">{data.price}</p>
+      <p className="price">{`${data.price} $`}</p>
       <div className="buttonDelete" onClick={() => deleteProductBag()}>
         <IoMdTrash />
       </div>

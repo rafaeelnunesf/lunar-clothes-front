@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const BASE_URL = "https://lunar-clothes.herokuapp.com";
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://lunar-clothes.herokuapp.com";
 
 function createConfig(token) {
   return { headers: { Authorization: `Bearer ${token}` } };
@@ -63,6 +62,11 @@ function deleteMyBagProducts(token) {
   return axios.delete(`${BASE_URL}/delete/checkout`, createConfig(token));
 }
 
+function sendEmail(token) {
+  const config = createConfig(token);
+  return axios.get(`${BASE_URL}/checkout`, config);
+}
+
 const api = {
   getProducts,
   postSignUp,
@@ -77,6 +81,7 @@ const api = {
   deleteProduct,
   updateQuantityProduct,
   deleteMyBagProducts,
+  sendEmail,
 };
 
 export default api;
