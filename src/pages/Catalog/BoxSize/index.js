@@ -58,7 +58,7 @@ export default function BoxSize({ popup, setPopup }) {
               </ButtonSize>
             ))}
           </div>
-          <Button fieldButton={"ADICIONAR AO CARRINHO"}></Button>
+          <Button fieldButton={"ADD TO CART"}></Button>
         </form>
       </PopUp>
     </Box>

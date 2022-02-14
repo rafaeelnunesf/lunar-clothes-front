@@ -14,7 +14,7 @@ export default async function valideRegistration(data, navigate) {
     try {
       await api.postSignUp(data);
 
-      navigate("/entrar");
+      navigate("/login");
     } catch (err) {
       if (err.message.includes(409)) {
         return { field: "email", message: "E-mail já cadastrado!" };

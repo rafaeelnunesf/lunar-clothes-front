@@ -6,7 +6,7 @@ import Container from "../../components/PageComponents/Container";
 export default function Catalog() {
   return (
     <Container>
-      <Header page={"Catálogo"} hasSearch={true}></Header>
+      <Header page={"Catalog"} hasSearch={true}></Header>
       <Products></Products>
       <Footer></Footer>
     </Container>

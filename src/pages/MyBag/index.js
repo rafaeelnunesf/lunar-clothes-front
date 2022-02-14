@@ -26,7 +26,8 @@ export default function MyBag() {
         title: "Oops...",
         text: "Faça login!",
       });
-      navigate("/entrar");
+      navigate("/");
+      navigate("/login");
     }
     // eslint-disable-next-line
   }, []);
@@ -48,10 +49,10 @@ export default function MyBag() {
   return (
     <Container>
       <BsChevronLeft className="headerIcon" />
-      <h2>Carrinho</h2>
+      <h2>Cart</h2>
       <div className="listProducts">
         {productsInBag.length === 0 ? (
-          <h3>Seu carrinho está vazio!</h3>
+          <h3>Your cart is empty!</h3>
         ) : (
           productsInBag.map((product) => (
             <BoxProductBag
@@ -63,7 +64,7 @@ export default function MyBag() {
         )}
       </div>
       <div className="totalAmount">
-        <p>Valor total:</p>
+        <p>Total value:</p>
         <span>R$ {total}</span>
       </div>
       <Button fieldButton={"CHECKOUT"}></Button>

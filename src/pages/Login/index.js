@@ -31,20 +31,20 @@ export default function Login() {
     initInputLogin(setInputLogin, error);
   }
 
-  if (!inputLogin) return <h1>Carregando...</h1>;
+  if (!inputLogin) return <h1>Loading...</h1>;
   return (
     <ContainerAuth>
       <BsChevronLeft className="headerIcon" onClick={() => navigate(-1)} />
-      <h2>Entrar</h2>
+      <h2>Sign-In</h2>
       <FormContainer onSubmit={login} noValidate>
         <Inputs inputs={inputLogin} data={data} setData={setData} />
         <CustomLink>
-          <Link to="/cadastro">
-            <span>Não possui conta?</span>
+          <Link to="/register">
+            <span>Don't you have an account?</span>
             <BsArrowRight className="iconLink" />
           </Link>
         </CustomLink>
-        <Button fieldButton={"ENTRAR"} />
+        <Button fieldButton={"SIGN-IN"} />
       </FormContainer>
     </ContainerAuth>
   );
