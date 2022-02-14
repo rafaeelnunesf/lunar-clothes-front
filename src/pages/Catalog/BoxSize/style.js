@@ -1,19 +1,9 @@
 import styled from "styled-components";
 
-const Box = styled.div`
-  width: 100%;
-  height: 100vh;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.2);
-`;
-
 const PopUp = styled.div`
   width: 100%;
-  height: 286px;
+  transition: all 0.25s linear;
+  height: ${({ show }) => (show ? "286px" : "0")};
   background-color: #f9f9f9;
   box-shadow: 0px -4px 30px rgba(0, 0, 0, 0.08);
   border-radius: 34px 34px 0px 0px;
@@ -56,8 +46,20 @@ const ButtonSize = styled.button`
   border-radius: 8px;
   font-size: 14px;
 
+  justify-self: center;
   align-self: center;
   text-align: center;
+`;
+
+const Box = styled.div`
+  width: 100%;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.2);
 `;
 
 export { Box, PopUp, ButtonSize };

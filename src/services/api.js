@@ -3,6 +3,10 @@ import axios from "axios";
 // const BASE_URL = "https://lunar-clothes.herokuapp.com";
 const BASE_URL = "http://localhost:5000";
 
+function configToken(token) {
+  return { headers: { Authorization: `Bearer ${token}` } };
+}
+
 function getProducts() {
   return axios.get(`${BASE_URL}/catalog`);
 }
@@ -19,12 +23,16 @@ function getSizes(id) {
   return axios.get(`${BASE_URL}/catalog/${id}`);
 }
 
-function postBag(data) {
-  return axios.post(`${BASE_URL}/mybag`, data);
+function postBag(data, token) {
+  return axios.post(`${BASE_URL}/mybag`, data, configToken(token));
 }
 
 function getBag(token) {
-  return axios.get(`${BASE_URL}/mybag`);
+  return axios.get(`${BASE_URL}/mybag`, configToken(token));
+}
+
+function deleteProduct(id, token) {
+  return axios.delete(`${BASE_URL}/mybag/${id}`, configToken(token));
 }
 
 const api = {
@@ -34,6 +42,7 @@ const api = {
   getSizes,
   postBag,
   getBag,
+  deleteProduct,
 };
 
 export default api;

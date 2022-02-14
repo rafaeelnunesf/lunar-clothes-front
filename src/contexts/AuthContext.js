@@ -4,11 +4,11 @@ import { createContext } from "react";
 export const UserToken = createContext();
 
 export default function UserTokenProvider({ children }) {
-  const [token, setToken] = useState({});
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   function setAndPersistToken(data) {
     setToken(data);
-    localStorage.setItem("dataUser", JSON.stringify(data));
+    localStorage.setItem("token", data);
   }
 
   return (
