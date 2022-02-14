@@ -29,20 +29,20 @@ export default function Signup() {
     initInputRegister(setinputRegister, error);
   }
 
-  if (!inputRegister) return <h1>Carregando...</h1>;
+  if (!inputRegister) return <h1>Loading...</h1>;
   return (
     <ContainerAuth>
       <BsChevronLeft className="headerIcon" onClick={() => navigate(-1)} />
-      <h2>Cadastre-se</h2>
+      <h2>Register</h2>
       <FormContainer onSubmit={registrationNewUser} noValidate>
         <Inputs inputs={inputRegister} data={data} setData={setData} />
         <CustomLink>
-          <Link to="/entrar">
-            <span>Já tem uma conta?</span>
+          <Link to="/login">
+            <span>Already have an account?</span>
             <BsArrowRight className="iconLink" />
           </Link>
         </CustomLink>
-        <Button fieldButton={"CADASTRAR"} />
+        <Button fieldButton={"REGISTER"} />
       </FormContainer>
     </ContainerAuth>
   );
