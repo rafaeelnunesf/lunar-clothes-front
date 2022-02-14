@@ -39,6 +39,10 @@ const Product = styled.div`
 
     color: #eeeeee;
     font-size: 20px;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 

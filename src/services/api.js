@@ -31,6 +31,10 @@ function getBag(token) {
   return axios.get(`${BASE_URL}/mybag`, configToken(token));
 }
 
+function deleteProduct(id, token) {
+  return axios.delete(`${BASE_URL}/mybag/${id}`, configToken(token));
+}
+
 const api = {
   getProducts,
   postSignUp,
@@ -38,6 +42,7 @@ const api = {
   getSizes,
   postBag,
   getBag,
+  deleteProduct,
 };
 
 export default api;

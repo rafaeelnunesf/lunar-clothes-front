@@ -22,6 +22,10 @@ const Container = styled.div`
     align-self: flex-start;
   }
 
+  h3 {
+    color: #9b9b9b;
+  }
+
   .listProducts {
     width: 100%;
     height: calc(100vh - 357px);
