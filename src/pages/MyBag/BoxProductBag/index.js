@@ -10,7 +10,7 @@ import { BoxButtons, Product } from "./style";
 import api from "../../../services/api";
 
 export default function BoxProductBag({ data, reload }) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(data.quantity);
   const { token } = useContext(UserToken);
 
   async function deleteProductBag() {
@@ -30,14 +30,17 @@ export default function BoxProductBag({ data, reload }) {
     }
   }
 
-  function controlQuantity(add) {
+  async function controlQuantity(id, add) {
     if (add) {
       setQuantity(quantity + 1);
+      await api.updateQuantityProduct(id, token, quantity + 1);
     } else if (!add && quantity === 1) {
       setQuantity(1);
     } else {
       setQuantity(quantity - 1);
+      await api.updateQuantityProduct(id, token, quantity - 1);
     }
+    reload();
   }
 
   return (
@@ -46,11 +49,14 @@ export default function BoxProductBag({ data, reload }) {
       <div>
         <DetailProductBag data={data} />
         <BoxButtons>
-          <Fab aria-label="remove" onClick={() => controlQuantity(false)}>
+          <Fab
+            aria-label="remove"
+            onClick={() => controlQuantity(data._id, false)}
+          >
             <IoRemoveOutline />
           </Fab>
-          <span>{quantity}</span>
-          <Fab aria-label="add" onClick={() => controlQuantity(true)}>
+          <span>{data.quantity}</span>
+          <Fab aria-label="add" onClick={() => controlQuantity(data._id, true)}>
             <IoAddOutline />
           </Fab>
         </BoxButtons>

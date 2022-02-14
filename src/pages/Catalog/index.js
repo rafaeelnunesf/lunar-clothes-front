@@ -8,7 +8,6 @@ export default function Catalog() {
     <Container>
       <Header page={"Catalog"} hasSearch={true}></Header>
       <Products></Products>
-      <Footer></Footer>
     </Container>
   );
 }
