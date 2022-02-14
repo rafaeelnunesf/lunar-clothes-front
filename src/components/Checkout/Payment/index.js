@@ -1,22 +1,47 @@
 import styled from "styled-components";
 import TitleSection from "../TitleSection";
-import ChangeButton from "../TitleSection";
+import ChangeButton from "../ChangeButton";
 import cardImg from "../../../assets/mastercard.svg";
-export default function Payment() {
-  const Card = {
-    name: "Rafael",
-    cardNumber: "5546 8205 3693 3547",
-    expiryDate: "31/12",
-    cvv: "666",
-  };
+import { useContext } from "react";
+import { UserToken } from "../../../contexts/AuthContext";
+import { useState, useEffect } from "react";
+
+import api from "../../../services/api";
+export default function Payment({ children }) {
+  // const { token } = useContext(UserToken);
+  const token = "fb44401b-3403-40d9-968b-737b91eaec3a";
+  const setPaymentActive = children;
+  const [paymentData, setPaymentData] = useState();
+
+  useEffect(() => getAddressFromAPI(), []);
+  async function getAddressFromAPI() {
+    try {
+      const payment = await api.getPaymentMethod(token);
+      delete payment?.data._id;
+      delete payment?.data.userId;
+      setPaymentData(payment?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <PaymentSection>
       <TitleSection>Payment</TitleSection>
       <CardInfo>
-        <img src={cardImg} alt="card" />
-        <p>{`**** **** **** ${Card.cardNumber.slice(-4)}`}</p>
+        {paymentData !== undefined ? (
+          <>
+            <img src={cardImg} alt="card" />
+            <p>{`**** **** **** ${paymentData.cardNumber.slice(-4)}`}</p>
+            <ChangeButton onClick={() => setPaymentActive(true)}>
+              Change
+            </ChangeButton>
+          </>
+        ) : (
+          <AddNewPayment onClick={() => setPaymentActive(true)}>
+            ADD PAYMENT
+          </AddNewPayment>
+        )}
       </CardInfo>
-      <ChangeButton>Change</ChangeButton>
     </PaymentSection>
   );
 }
@@ -42,4 +67,25 @@ const CardInfo = styled.div`
   align-items: center;
   gap: 20px;
   margin-top: 20px;
+`;
+const AddNewPayment = styled.button`
+  all: unset;
+  height: 48px;
+  width: 200px;
+
+  background: #db3022;
+  box-shadow: 0px 4px 8px rgba(211, 38, 38, 0.25);
+  border-radius: 25px;
+  font-family: Metropolis;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto auto;
+
+  color: #ffffff;
 `;

@@ -1,25 +1,45 @@
-import React from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import TitleSection from "../TitleSection";
 import ChangeButton from "../ChangeButton";
+import api from "../../../services/api";
+import { useEffect } from "react";
+import { UserToken } from "../../../contexts/AuthContext";
 
-export default function Address() {
-  const Adress = {
-    name: "Jane Doe",
-    adress: "3 Newbridge Court ",
-    city: "Chino Hills",
-    state: "California",
-    zipCode: "91709",
-    country: "United States",
-  };
+export default function Address({ children }) {
+  const { token } = useContext(UserToken);
+  const setAddressActive = children;
+  const [addressData, setAddressData] = useState();
+
+  useEffect(() => getAddressFromAPI(), []);
+  async function getAddressFromAPI() {
+    try {
+      const address = await api.getAddress(token);
+      delete address.data._id;
+      delete address.data.userId;
+      setAddressData(address.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <AdressSection>
       <TitleSection>Shipping adress</TitleSection>
       <AdressContainer>
-        <h1>{Adress.name}</h1>
-        <p>{Adress.adress}</p>
-        <p>{`${Adress.city}, ${Adress.state}, ${Adress.country}`}</p>
-        <ChangeButton>Change</ChangeButton>
+        {addressData !== undefined ? (
+          <>
+            <h1>Adress</h1>
+            <p>{`${addressData.number} ${addressData.street}`}</p>
+            <p>{`${addressData.city}, ${addressData.state}, ${addressData.country}`}</p>{" "}
+            <ChangeButton onClick={() => setAddressActive(true)}>
+              Change
+            </ChangeButton>
+          </>
+        ) : (
+          <AddNewAddress onClick={() => setAddressActive(true)}>
+            ADD ADDRESS
+          </AddNewAddress>
+        )}
       </AdressContainer>
     </AdressSection>
   );
@@ -57,4 +77,25 @@ const AdressContainer = styled.div`
     align-items: center;
     margin-bottom: 7px;
   }
+`;
+const AddNewAddress = styled.button`
+  all: unset;
+  height: 48px;
+  width: 200px;
+
+  background: #db3022;
+  box-shadow: 0px 4px 8px rgba(211, 38, 38, 0.25);
+  border-radius: 25px;
+  font-family: Metropolis;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto auto;
+
+  color: #ffffff;
 `;
