@@ -1,5 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import CustomButton from "./style";
 
 export default function Button({ fieldButton }) {
-  return <CustomButton type="submit">{fieldButton}</CustomButton>;
+  let navigate = useNavigate();
+  return (
+    <CustomButton onClick={() => navigate("/checkout")} type="submit">
+      {fieldButton}
+    </CustomButton>
+  );
 }

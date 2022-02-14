@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import back from "../../assets/back.svg";
 import search from "../../assets/search.svg";
 export default function Header({ page, hasSearch }) {
+  let navigate = useNavigate();
   return (
     <ContainerHeader>
       <div>
-        <img src={back} alt="" />
+        <img src={back} alt="" onClick={() => navigate(-1)} />
         <h1>{page}</h1>
         {hasSearch && <img src={search} alt="" />}
       </div>
