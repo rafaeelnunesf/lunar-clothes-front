@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import dhl from "../../../assets/dhl.svg";
 import fedex from "../../../assets/fedex.svg";

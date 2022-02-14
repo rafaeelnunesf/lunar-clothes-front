@@ -52,7 +52,6 @@ const ContainerFooter = styled.div`
   border-radius: 12px 12px 0px 0px;
   height: 83px;
   width: 100vw;
-  margin: 0 -16px;
 
   display: flex;
   align-items: center;
