@@ -51,6 +51,10 @@ function getPaymentMethod(token) {
   return axios.get(`${BASE_URL}/add-new-payment-method`, config);
 }
 
+function deleteMyBagProducts(token) {
+  return axios.delete(`${BASE_URL}/delete/checkout`, createConfig(token));
+}
+
 const api = {
   getProducts,
   postSignUp,
@@ -63,6 +67,7 @@ const api = {
   getAddress,
   getPaymentMethod,
   deleteProduct,
+  deleteMyBagProducts,
 };
 
 export default api;

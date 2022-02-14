@@ -10,10 +10,12 @@ import {
 } from "../../components/Checkout/index.js";
 import AddAddress from "./AddAddress";
 import AddPaymentMethod from "./AddPaymentMethod";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import validateSubmitOrder from "../../validation/validateSubmitOrder";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
+import { UserToken } from "../../contexts/AuthContext";
 
 export default function Checkout() {
   const [addressActive, setAddressActive] = useState(false);
@@ -21,8 +23,9 @@ export default function Checkout() {
   const [selectedDelivery, setSelectedDelivery] = useState();
   const [addressData, setAddressData] = useState();
   const [paymentData, setPaymentData] = useState();
+  const { token } = useContext(UserToken);
   let navigate = useNavigate();
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const validationData = {
       address: addressData,
@@ -32,14 +35,18 @@ export default function Checkout() {
     const invalid = validateSubmitOrder(validationData);
     if (invalid) return;
 
-    Swal.fire({
-      icon: "success",
-      title: "Completed order!",
-      showConfirmButton: true,
-      text: "Check your email!",
-    });
-
-    navigate("/");
+    try {
+      await api.deleteMyBagProducts(token);
+      Swal.fire({
+        icon: "success",
+        title: "Completed order!",
+        showConfirmButton: true,
+        text: "Check your email!",
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <Container>
