@@ -1,41 +1,11 @@
-import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import styled from "styled-components";
-import Swal from "sweetalert2";
-import { UserToken } from "../../../contexts/AuthContext";
-import api from "../../../services/api";
+import { OrderContext } from "../../../contexts/OrderContext";
 
 export default function Values({ children }) {
   const selectedDelivery = children;
-  const { token } = useContext(UserToken);
-  const [total, setTotal] = useState();
-  let navigate = useNavigate();
-  useEffect(() => {
-    if (token) {
-      initProductsInBag();
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Faça login!",
-      });
-      navigate("/");
-      navigate("/login");
-    }
-    // eslint-disable-next-line
-  }, []);
+  const { total } = useContext(OrderContext);
 
-  async function initProductsInBag() {
-    try {
-      const response = await api.getBag(token);
-
-      let soma = 0;
-      response.data.map((product) => (soma += product.price));
-      setTotal(soma);
-    } catch (err) {
-      console.log(err);
-    }
-  }
   let summary = total + selectedDelivery?.price;
   return (
     <ValuesSection>

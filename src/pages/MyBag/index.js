@@ -9,10 +9,11 @@ import { UserToken } from "../../contexts/AuthContext";
 import BoxProductBag from "./BoxProductBag";
 import Button from "../../components/formComponents/Button";
 import Container from "./style";
+import { OrderContext } from "../../contexts/OrderContext";
 
 export default function MyBag() {
   const [productsInBag, setProductsInBag] = useState();
-  const [total, setTotal] = useState();
+  const { total, setTotal } = useContext(OrderContext);
   const { token } = useContext(UserToken);
   const navigate = useNavigate();
 
@@ -66,7 +67,7 @@ export default function MyBag() {
         </div>
         <div className="totalAmount">
           <p>Total value:</p>
-          <span>R$ {total}</span>
+          <span>{total} $</span>
         </div>
         <Button fieldButton={"CHECKOUT"}></Button>
       </form>
