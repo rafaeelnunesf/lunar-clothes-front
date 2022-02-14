@@ -4,13 +4,12 @@ import ChangeButton from "../ChangeButton";
 import cardImg from "../../../assets/mastercard.svg";
 import { useContext } from "react";
 import { UserToken } from "../../../contexts/AuthContext";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import api from "../../../services/api";
 export default function Payment({ children }) {
   const { token } = useContext(UserToken);
-  const setPaymentActive = children;
-  const [paymentData, setPaymentData] = useState();
+  const [setPaymentActive, paymentData, setPaymentData] = children;
 
   useEffect(() => getAddressFromAPI(), []);
   async function getAddressFromAPI() {

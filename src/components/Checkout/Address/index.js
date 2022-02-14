@@ -8,8 +8,7 @@ import { UserToken } from "../../../contexts/AuthContext";
 
 export default function Address({ children }) {
   const { token } = useContext(UserToken);
-  const setAddressActive = children;
-  const [addressData, setAddressData] = useState();
+  const [setAddressActive, addressData, setAddressData] = children;
 
   useEffect(() => getAddressFromAPI(), []);
   async function getAddressFromAPI() {

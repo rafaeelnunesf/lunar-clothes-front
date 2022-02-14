@@ -1,10 +1,15 @@
 import styled from "styled-components";
-import { MdOutlinePersonOutline, MdAddShoppingCart } from "react-icons/md";
-import { AiOutlineHome } from "react-icons/ai";
+import { MdOutlinePersonOutline } from "react-icons/md";
 import { BsHandbag, BsShop } from "react-icons/bs";
 import { IconContext } from "react-icons";
+import { useLocation, useNavigate } from "react-router-dom";
 export default function Footer() {
-  function handleClick(e) {
+  let navigate = useNavigate();
+  let currentLocation = useLocation().pathname;
+
+  console.log(currentLocation);
+
+  function handleClick(e, location) {
     let colorSvg = e.children[0].style;
     let colorLabel = e.children[1].style;
     colorLabel.color === "red"
@@ -13,19 +18,23 @@ export default function Footer() {
     colorSvg.color === "red"
       ? (colorSvg.color = "#9B9B9B")
       : (colorSvg.color = "red");
+
+    navigate(location);
   }
   const arrayIcons = [
-    { icon: <AiOutlineHome />, label: "Home" },
-    { icon: <BsShop />, label: "Shop" },
-    { icon: <BsHandbag />, label: "Bag" },
-    { icon: <MdAddShoppingCart />, label: "Add" },
-    { icon: <MdOutlinePersonOutline />, label: "Profile" },
+    { icon: <BsShop />, label: "Shop", location: "/" },
+    { icon: <BsHandbag />, label: "Bag", location: "/cart" },
+    { icon: <MdOutlinePersonOutline />, label: "Profile", location: "/login" },
   ];
   return (
     <IconContext.Provider value={{ color: "#9B9B9B", size: "25px" }}>
       <ContainerFooter>
-        {arrayIcons.map(({ icon, label }) => (
-          <IconFooter key={label} onClick={(e) => handleClick(e.currentTarget)}>
+        {arrayIcons.map(({ icon, label, location }) => (
+          <IconFooter
+            hasColor={location === currentLocation}
+            key={label}
+            onClick={(e) => handleClick(e.currentTarget, location)}
+          >
             {icon}
             <p>{label}</p>
           </IconFooter>
@@ -60,6 +69,9 @@ const IconFooter = styled.div`
     font-size: 10px;
     line-height: 10px;
     text-align: center;
-    color: #9b9b9b;
+    color: ${(props) => (props.hasColor ? "red" : "#9b9b9b")};
+  }
+  svg {
+    fill: ${(props) => (props.hasColor ? "red" : "#9b9b9b")};
   }
 `;

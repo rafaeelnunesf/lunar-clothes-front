@@ -7,7 +7,7 @@ import api from "../../../services/api";
 import { UserToken } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
 export default function AddAddress({ children }) {
-  const setAddressActive = children;
+  const [setAddressActive, setAddressData] = children;
   const { token } = useContext(UserToken);
 
   const [formData, setFormdata] = useState({
@@ -35,6 +35,10 @@ export default function AddAddress({ children }) {
         timer: 1500,
       });
       setAddressActive(false);
+      const address = await api.getAddress(token);
+      delete address.data._id;
+      delete address.data.userId;
+      setAddressData(address.data);
     } catch (err) {
       console.log(err);
     }
