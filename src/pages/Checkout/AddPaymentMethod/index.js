@@ -8,8 +8,7 @@ import { UserToken } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
 export default function AddPaymentMethod({ children }) {
   const setPaymentActive = children;
-  // const { token } = useContext(UserToken);
-  const token = "fb44401b-3403-40d9-968b-737b91eaec3a";
+  const { token } = useContext(UserToken);
   const [formData, setFormdata] = useState({
     name: "",
     cardNumber: "",

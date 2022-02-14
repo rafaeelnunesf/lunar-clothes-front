@@ -8,8 +8,7 @@ import { useState, useEffect } from "react";
 
 import api from "../../../services/api";
 export default function Payment({ children }) {
-  // const { token } = useContext(UserToken);
-  const token = "fb44401b-3403-40d9-968b-737b91eaec3a";
+  const { token } = useContext(UserToken);
   const setPaymentActive = children;
   const [paymentData, setPaymentData] = useState();
 
