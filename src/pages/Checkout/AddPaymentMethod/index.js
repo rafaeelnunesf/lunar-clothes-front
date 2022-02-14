@@ -7,7 +7,7 @@ import api from "../../../services/api";
 import { UserToken } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
 export default function AddPaymentMethod({ children }) {
-  const setPaymentActive = children;
+  const [setPaymentActive, setPaymentData] = children;
   const { token } = useContext(UserToken);
   const [formData, setFormdata] = useState({
     name: "",
@@ -31,6 +31,10 @@ export default function AddPaymentMethod({ children }) {
         timer: 1500,
       });
       setPaymentActive(false);
+      const payment = await api.getPaymentMethod(token);
+      delete payment?.data._id;
+      delete payment?.data.userId;
+      setPaymentData(payment?.data);
     } catch (err) {
       console.log(err);
     }
