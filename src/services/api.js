@@ -22,12 +22,16 @@ function getSizes(id) {
   return axios.get(`${BASE_URL}/catalog/${id}`);
 }
 
-function postBag(data) {
-  return axios.post(`${BASE_URL}/mybag`, data);
+function postBag(data, token) {
+  return axios.post(`${BASE_URL}/mybag`, data, createConfig(token));
 }
 
 function getBag(token) {
-  return axios.get(`${BASE_URL}/mybag`);
+  return axios.get(`${BASE_URL}/mybag`, createConfig(token));
+}
+
+function deleteProduct(id, token) {
+  return axios.delete(`${BASE_URL}/mybag/${id}`, createConfig(token));
 }
 
 function postAddress(data, token) {
@@ -58,6 +62,7 @@ const api = {
   postPaymentMethod,
   getAddress,
   getPaymentMethod,
+  deleteProduct,
 };
 
 export default api;

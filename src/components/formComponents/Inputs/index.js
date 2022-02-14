@@ -16,7 +16,7 @@ export default function Inputs({ inputs, data, setData }) {
           variant="standard"
           key={index}
           autoComplete={input.autoComplete}
-          required
+          helperText={input.textError ? input.textError : ""}
         />
       ))}
     </>

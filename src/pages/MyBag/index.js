@@ -1,36 +1,70 @@
-import BoxProductBag from "./BoxProductBag";
+import { useContext, useEffect, useState } from "react";
 import { BsChevronLeft } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-import Button from "../../components/formComponents/Button";
-import Container from "./style";
-import Footer from "../../components/Footer";
-import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { UserToken } from "../../contexts/AuthContext";
+
+import BoxProductBag from "./BoxProductBag";
+import Button from "../../components/formComponents/Button";
+import Footer from "../../components/Footer";
+import Container from "./style";
 
 export default function MyBag() {
   const [productsInBag, setProductsInBag] = useState();
+  const [total, setTotal] = useState();
+  const { token } = useContext(UserToken);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const request = api.getBag();
-    request.then((response) => {
-      setProductsInBag(response.data);
-    });
+    if (token) {
+      initProductsInBag();
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Faça login!",
+      });
+      navigate("/entrar");
+    }
+    // eslint-disable-next-line
   }, []);
-  console.log(productsInBag);
 
-  if (!productsInBag || productsInBag.length === 0) return <h1>Loading</h1>;
+  async function initProductsInBag() {
+    try {
+      const response = await api.getBag(token);
+      setProductsInBag(response.data);
+
+      let soma = 0;
+      response.data.map((product) => (soma += product.price));
+      setTotal(soma);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  if (!productsInBag) return <h1>Loading</h1>;
   return (
     <Container>
       <BsChevronLeft className="headerIcon" />
       <h2>Carrinho</h2>
       <div className="listProducts">
-        {productsInBag.map((product, i) => (
-          <BoxProductBag data={product} index={i} key={i} />
-        ))}
+        {productsInBag.length === 0 ? (
+          <h3>Seu carrinho está vazio!</h3>
+        ) : (
+          productsInBag.map((product) => (
+            <BoxProductBag
+              data={product}
+              key={product._id}
+              reload={initProductsInBag}
+            />
+          ))
+        )}
       </div>
       <div className="totalAmount">
         <p>Valor total:</p>
-        <span>R$124</span>
+        <span>R$ {total}</span>
       </div>
       <Button fieldButton={"CHECKOUT"}></Button>
       <Footer />

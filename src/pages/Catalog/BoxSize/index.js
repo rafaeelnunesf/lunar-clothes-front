@@ -1,71 +1,57 @@
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import Button from "../../../components/formComponents/Button";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../../services/api";
+import { UserToken } from "../../../contexts/AuthContext";
+
+import Button from "../../../components/formComponents/Button";
+import valideSizeProduct from "../../../validation/valideSizeProduct";
 import { Box, ButtonSize, PopUp } from "./style";
 
 export default function BoxSize({ popup, setPopup }) {
   const [size, setSize] = useState();
   const [selectSize, setSelectSize] = useState();
+  const { token } = useContext(UserToken);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const request = api.getSizes(popup);
-    request.then((response) => {
-      setSize(response.data);
-    });
+    requestSizes();
     // eslint-disable-next-line
   }, []);
 
-  async function addMyBag(e) {
-    e.preventDefault();
-    console.log(selectSize);
+  async function requestSizes() {
     try {
-      if (selectSize === undefined) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Choose a size!",
-        });
-        return;
-      }
-      const data = {
-        id: popup,
-        size: size[selectSize],
-      };
-      const response = await api.postBag(data);
-      console.log(response);
-      setPopup();
-      Swal.fire({
-        icon: "success",
-        title: "product added successfully!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      const response = await api.getSizes(popup);
+      setSize(response.data);
     } catch (err) {
       console.log(err);
     }
   }
 
-  function handleClick(i) {
-    if (selectSize === i) {
+  async function addMyBag(e) {
+    e.preventDefault();
+
+    await valideSizeProduct(selectSize, popup, setPopup, navigate, token);
+  }
+
+  function handleClick(oneSize) {
+    if (selectSize === oneSize) {
       setSelectSize();
     } else {
-      setSelectSize(i);
+      setSelectSize(oneSize);
     }
   }
 
-  if (!size) return <h1>Loading</h1>;
   return (
     <Box>
-      <PopUp>
+      <PopUp show={size}>
         <p>Selecione o tamanho</p>
         <form onSubmit={addMyBag}>
           <div className="listSizes">
             {size?.map((oneSize, i) => (
               <ButtonSize
                 key={i}
-                onClick={() => handleClick(i)}
-                select={selectSize === i}
+                onClick={() => handleClick(oneSize)}
+                select={selectSize === oneSize}
                 type="button"
               >
                 {oneSize}

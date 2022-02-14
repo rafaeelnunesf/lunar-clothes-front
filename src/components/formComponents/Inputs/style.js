@@ -3,10 +3,18 @@ import styled from "styled-components";
 
 const CustomInput = styled(TextField)`
   background: white;
-  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 1px 8px
+    ${({ helperText }) =>
+      helperText.length > 0 ? "rgba(219, 48, 34, 0.5)" : "rgba(0, 0, 0, 0.05)"};
   border-radius: 4px;
   height: 64px;
+  margin-left: 8px;
   font-family: "Metropolis";
+
+  p {
+    color: #db3022;
+    margin: -0.1rem 0 0 1rem;
+  }
 
   label {
     margin-left: 1rem;
@@ -35,6 +43,10 @@ const CustomInput = styled(TextField)`
     ::before {
       border-bottom: none !important;
     }
+  }
+
+  :hover {
+    margin-left: 8px;
   }
 `;
 

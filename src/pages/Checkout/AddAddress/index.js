@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { SubmitButton } from "../../../components/Checkout";
 import { Box } from "../../Catalog/BoxSize/style";
 import { useContext, useState } from "react";
-import validateForm from "../../../utils/validateForm";
+import validateForm from "../../../validation/validateForm";
 import api from "../../../services/api";
 import { UserToken } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
