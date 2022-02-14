@@ -26,7 +26,7 @@ export default function Footer() {
 
   const arrayIcons = [
     { icon: <BsShop />, label: "Shop", location: "/" },
-    { icon: <BsHandbag />, label: "Bag", location: "/cart" },
+    { icon: <BsHandbag />, label: "Bag", location: "/mybag" },
     { icon: <MdOutlinePersonOutline />, label: "Profile", location: "/login" },
   ];
   return (
