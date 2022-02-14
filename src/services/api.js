@@ -55,6 +55,11 @@ function deleteMyBagProducts(token) {
   return axios.delete(`${BASE_URL}/delete/checkout`, createConfig(token));
 }
 
+function sendEmail(token) {
+  const config = createConfig(token);
+  return axios.get(`${BASE_URL}/checkout`, config);
+}
+
 const api = {
   getProducts,
   postSignUp,
@@ -68,6 +73,7 @@ const api = {
   getPaymentMethod,
   deleteProduct,
   deleteMyBagProducts,
+  sendEmail,
 };
 
 export default api;

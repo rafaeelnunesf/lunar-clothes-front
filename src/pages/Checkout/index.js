@@ -44,6 +44,7 @@ export default function Checkout() {
         text: "Check your email!",
       });
       navigate("/");
+      await api.sendEmail(token);
     } catch (error) {
       console.log(error);
     }
